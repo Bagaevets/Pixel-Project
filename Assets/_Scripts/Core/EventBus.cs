@@ -22,4 +22,10 @@ public static class EventBus
         Action<GameEvent> wrappedListener = (e) => listener((T)e);  // объявляется переменная типа Action<GameEvent>в которую помещаем события типа "e" и пребразовываем в тип "T"
         _eventListeners[eventType].Add(wrappedListener);// Добавляем нового подписчика в список подписчиков на это событие
     }
+
+    public static void Unsubscribe<T>(Action<T> listener) where T : GameEvent
+    { 
+       Type eventType = typeof(T);
+        if (!_eventListeners.ContainsKey(eventType)) return;
+    }
 }
